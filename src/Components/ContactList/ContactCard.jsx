@@ -8,7 +8,8 @@ const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
       orientation="horizontal"
       variant="outlined" 
       sx={{ 
-        width: '210px', 
+        display:'flex',
+        width: '260px', 
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         border: 2, 
         margin:1,
@@ -17,7 +18,7 @@ const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
       onClick={() => onCardClick(contact)}
     >
       <CardOverflow>
-        <AspectRatio ratio="1" sx={{ width: '90px' }}>
+        <AspectRatio ratio="1" sx={{ width: '70px', marginRight:1 }}>
           <img
             src={contact.img}
             alt=""
@@ -25,7 +26,7 @@ const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
         </AspectRatio>
       </CardOverflow>
       <CardContent sx={{ textAlign: 'center', alignItems:'center' }}>
-        <Typography variant="h6" sx={{ color: 'white', paddingTop:2 }}>
+        <Typography variant="h6" sx={{ color: 'white', textAlign: 'center', display:'flex', alignItems:'center' }}>
           {contact.nombre}
         </Typography>
       </CardContent>
