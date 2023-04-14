@@ -1,18 +1,20 @@
 import React from "react";
 import { Card, CardOverflow, AspectRatio, Typography, CardContent } from '@mui/joy';
 
-const ContactCard = ({ contact = {} }) => {
+const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
 
   return (
     <Card
       orientation="horizontal"
-      variant="outlined"
+      variant="outlined" 
       sx={{ 
         width: '210px', 
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         border: 2, 
         margin:1,
+        cursor: 'pointer',
       }}
+      onClick={() => onCardClick(contact)}
     >
       <CardOverflow>
         <AspectRatio ratio="1" sx={{ width: '90px' }}>
