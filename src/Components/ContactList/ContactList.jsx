@@ -13,9 +13,10 @@ const ContactList = ({ contactsList = [], onCardClick = () => {}, }) => {
         border:'2px solid',
         maxWidth:'320px',
         width:'320px',
-        height:'400px',
+        height:'420px',
         backgroundColor: 'rgba(100, 100, 100, 0.2)',
-        overflow: 'auto'
+        overflow: 'auto',
+        marginBottom:1
       }}
     >
       <Typography variant="h6" sx={{ fontSize: 22, marginTop:1 }} >

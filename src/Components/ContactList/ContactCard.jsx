@@ -25,8 +25,22 @@ const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
           />
         </AspectRatio>
       </CardOverflow>
-      <CardContent sx={{ textAlign: 'center', alignItems:'center' }}>
-        <Typography variant="h6" sx={{ color: 'white', textAlign: 'center', display:'flex', alignItems:'center' }}>
+      <CardContent 
+        sx={{ 
+          display:'flex', 
+          textAlign: 'center', 
+          alignItems:'center' 
+        }}
+      >
+        <Typography 
+          variant="h6" 
+          sx={{ 
+            color: 'white', 
+            textAlign: 'center', 
+            display:'flex', 
+            alignItems:'center' 
+          }}
+        >
           {contact.nombre}
         </Typography>
       </CardContent>

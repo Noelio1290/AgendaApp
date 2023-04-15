@@ -9,9 +9,10 @@ const ShowContact = ({ contact = {} }) => {
       variant="outlined" 
       sx={{ 
         width: 280,
+        height:250,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        border: 2,  
-        margin:1
+        border: 2,
+        marginBottom:1
       }}
     >
       <CardOverflow>
@@ -22,15 +23,15 @@ const ShowContact = ({ contact = {} }) => {
           />
         </AspectRatio>
       </CardOverflow>
-      <Box sx={{ paddingTop:1 }}>
-        <Typography level="h6" sx={{ color: 'white', fontSize:20 }}>
+      <Box sx={{ }}>
+        <Typography variant="h6" sx={{ color: 'white', fontSize:22 }}>
           {contact.nombre}
         </Typography>
-        <Typography level="h6" sx={{ color: 'white', fontSize:18 }}>
-          {contact.numero}
+        <Typography variant="h6" sx={{ color: 'white', fontSize:16 }}>
+          Numero: {contact.numero}
         </Typography>
-        <Typography level="h6" sx={{ color: 'white', fontSize: 18}}>
-          {contact.direccion}
+        <Typography variant="h6" sx={{ color: 'white', fontSize: 16 }}>
+          Direccion: {contact.direccion}
         </Typography>
       </Box>
     </Card>

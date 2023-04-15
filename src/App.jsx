@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 import { Box, Container, Typography } from '@mui/material';
-import ContactList from './Components/ContactList/ContactList';
-import ShowContact from './Components/ShowContact/ShowContact';
+import ContactList from './Components/ContactList';
+import ShowContact from './Components/ShowContact';
+import ButtonSection from './Components/ButtonsSection';
+import ModalWithForm from './Components/ModalWithForm';
 
 function App() {
+  //Set ContactList
   const [ contactsList,setContactList ] = useState([
     {
       nombre: 'Noel Zamora Islas',
@@ -43,6 +46,8 @@ function App() {
       img:'https://c4.wallpaperflare.com/wallpaper/308/561/294/one-piece-wallpaper-preview.jpg'
     },
   ]);
+
+  //Set SeletedContact
   const [selectedContact, setSelectedContact] = useState({});
 
   const onCardClick = (contact) => {
@@ -50,10 +55,16 @@ function App() {
     console.log(contact)
   };
 
+  //Set Modal
+  const [ openModal, setOpenModal ] = useState(false);
+  const handleOpenModal = () => setOpenModal(true);
+  const handleCloseModal = () => setOpenModal(false);
+
   return (
     <Container>
+      <ModalWithForm openModal={openModal} handleCloseModal={handleCloseModal} />
       <Box>
-        <Typography variant='h6' sx={{ textAlign: 'center', fontSize: 80, fontFamily:'inherit', }}>
+        <Typography variant='h6' sx={{ textAlign: 'center', fontSize: 70, fontFamily:'inherit', }}>
           Agenda
         </Typography>
       </Box>
@@ -63,6 +74,7 @@ function App() {
         </Box>
         <Box sx={{  }}>
           <ShowContact contact={selectedContact} />
+          <ButtonSection handleOpenModal={handleOpenModal}/>
         </Box>
       </Box>
     </Container>
