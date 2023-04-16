@@ -27,32 +27,22 @@ function App() {
       direccion: 'Espiridion Moreno 103 Constitucion de laRepublica',
       img:'https://c4.wallpaperflare.com/wallpaper/308/561/294/one-piece-wallpaper-preview.jpg'
     },
-    {
-      nombre: 'Noel Zamora Islas',
-      numero: 5583637930,
-      direccion: 'Poniente 2 #40 AMSA',
-      img:'https://c4.wallpaperflare.com/wallpaper/830/266/321/anime-one-piece-monkey-d-luffy-wallpaper-preview.jpg'
-    },
-    {
-      nombre: 'Monserrat Gordillo Soriano',
-      numero: 5559609969,
-      direccion: 'Poniente 2 #40 AMSA',
-      img:'https://c4.wallpaperflare.com/wallpaper/700/719/787/anime-one-piece-nico-robin-wallpaper-preview.jpg'
-    },
-    {
-      nombre: 'Armando',
-      numero: 5538595115,
-      direccion: 'Espiridion Moreno 103 Constitucion de laRepublica',
-      img:'https://c4.wallpaperflare.com/wallpaper/308/561/294/one-piece-wallpaper-preview.jpg'
-    },
   ]);
+
+  const addContact = (contact) => {
+    setContactList([ ...contactsList, contact ])
+  };
+
+  const deleteContact = (contact) => {
+    const updatedContacts = contactsList.filter(Contact => Contact.nombre !== contact.nombre);
+    setContactList(updatedContacts);
+  };
 
   //Set SeletedContact
   const [selectedContact, setSelectedContact] = useState({});
 
   const onCardClick = (contact) => {
     setSelectedContact(contact)
-    console.log(contact)
   };
 
   //Set Modal
@@ -62,7 +52,7 @@ function App() {
 
   return (
     <Container>
-      <ModalWithForm openModal={openModal} handleCloseModal={handleCloseModal} />
+      <ModalWithForm openModal={openModal} handleCloseModal={handleCloseModal} addContact={addContact} />
       <Box>
         <Typography variant='h6' sx={{ textAlign: 'center', fontSize: 70, fontFamily:'inherit', }}>
           Agenda
@@ -74,7 +64,12 @@ function App() {
         </Box>
         <Box sx={{  }}>
           <ShowContact contact={selectedContact} />
-          <ButtonSection handleOpenModal={handleOpenModal}/>
+          <ButtonSection 
+            handleOpenModal={handleOpenModal} 
+            selectedContact={selectedContact} 
+            deleteContact={deleteContact} 
+            setSelectedContact={setSelectedContact}
+          />
         </Box>
       </Box>
     </Container>

@@ -1,7 +1,12 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
-const ButtonSection = ({ handleOpenModal }) => {
+const ButtonSection = ({ handleOpenModal, selectedContact, setSelectedContact, deleteContact, }) => {
+  const onDeleteContact = () => {
+    deleteContact(selectedContact);
+    setSelectedContact({})
+  };
+
   return (
     <Box 
       sx={{ 
@@ -27,7 +32,7 @@ const ButtonSection = ({ handleOpenModal }) => {
         <Button variant="outlined" sx={{ margin:1 }}>
           Editar
         </Button>
-        <Button variant="outlined" color="error" >
+        <Button variant="outlined" color="error" onClick={onDeleteContact} >
           Borrar
         </Button>
       </Box>
