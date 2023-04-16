@@ -10,18 +10,21 @@ function App() {
   //Set ContactList
   const [ contactsList,setContactList ] = useState([
     {
+      _id:'f610d4d9-b9ab-4f6f-aad7-85d115090c3c',
       nombre: 'Noel Zamora Islas',
       numero: 5583637930,
       direccion: 'Poniente 2 #40 AMSA',
       img:'https://c4.wallpaperflare.com/wallpaper/830/266/321/anime-one-piece-monkey-d-luffy-wallpaper-preview.jpg'
     },
     {
+      _id:'48f6f291-830b-41b3-a637-c66e0ffa10f0',
       nombre: 'Monserrat Gordillo Soriano',
       numero: 5559609969,
       direccion: 'Poniente 2 #40 AMSA',
       img:'https://c4.wallpaperflare.com/wallpaper/700/719/787/anime-one-piece-nico-robin-wallpaper-preview.jpg'
     },
     {
+      _id:'191eeae5-c1b9-47d4-9833-bae6cca97d6c',
       nombre: 'Armando',
       numero: 5538595115,
       direccion: 'Espiridion Moreno 103 Constitucion de laRepublica',
@@ -32,10 +35,22 @@ function App() {
   const addContact = (contact) => {
     setContactList([ ...contactsList, contact ])
   };
+  
+  const editContact = (contact) => {
+    const updatedContacts = contactsList.map(contactIndex => {
+      if (contactIndex._id === contact._id) {
+        return contact;
+      }
+      return contactIndex;
+    });
+    setContactList(updatedContacts);
+    setSelectedContact(contact)
+  }
 
   const deleteContact = (contact) => {
     const updatedContacts = contactsList.filter(Contact => Contact.nombre !== contact.nombre);
     setContactList(updatedContacts);
+    setSelectedContact({});
   };
 
   //Set SeletedContact
@@ -45,14 +60,32 @@ function App() {
     setSelectedContact(contact)
   };
 
+  //Set buttons active
+  const areButtonsActive = Object.keys(selectedContact).length > 0 ? false : true;
+
   //Set Modal
   const [ openModal, setOpenModal ] = useState(false);
   const handleOpenModal = () => setOpenModal(true);
   const handleCloseModal = () => setOpenModal(false);
 
+   //Set Modal edit
+   const [ openModalEdit, setOpenModalEdit ] = useState(false);
+   const handleOpenModalEdit = () => setOpenModalEdit(true);
+   const handleCloseModalEdit = () => setOpenModalEdit(false);
+
   return (
     <Container>
-      <ModalWithForm openModal={openModal} handleCloseModal={handleCloseModal} addContact={addContact} />
+      <ModalWithForm 
+        openModal={openModal} 
+        handleCloseModal={handleCloseModal} 
+        modalFunction={addContact}
+      />
+      <ModalWithForm 
+        openModal={openModalEdit} 
+        handleCloseModal={handleCloseModalEdit}
+        selectedContact={selectedContact}
+        modalFunction={editContact}
+      />
       <Box>
         <Typography variant='h6' sx={{ textAlign: 'center', fontSize: 70, fontFamily:'inherit', }}>
           Agenda
@@ -66,9 +99,10 @@ function App() {
           <ShowContact contact={selectedContact} />
           <ButtonSection 
             handleOpenModal={handleOpenModal} 
+            handleOpenModalEdit={handleOpenModalEdit}
             selectedContact={selectedContact} 
-            deleteContact={deleteContact} 
-            setSelectedContact={setSelectedContact}
+            deleteContact={deleteContact}
+            areButtonsActive={areButtonsActive}
           />
         </Box>
       </Box>

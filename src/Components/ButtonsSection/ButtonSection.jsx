@@ -1,10 +1,17 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
-const ButtonSection = ({ handleOpenModal, selectedContact, setSelectedContact, deleteContact, }) => {
+const ButtonSection = (
+  { 
+    handleOpenModal, 
+    handleOpenModalEdit, 
+    selectedContact, 
+    deleteContact, 
+    areButtonsActive,
+  }) => {
+  
   const onDeleteContact = () => {
     deleteContact(selectedContact);
-    setSelectedContact({})
   };
 
   return (
@@ -29,10 +36,10 @@ const ButtonSection = ({ handleOpenModal, selectedContact, setSelectedContact, d
         <Button variant="outlined" color="success" onClick={handleOpenModal} >
           Crear
         </Button>
-        <Button variant="outlined" sx={{ margin:1 }}>
+        <Button disabled={areButtonsActive} variant="outlined" onClick={handleOpenModalEdit} sx={{ margin:1 }} >
           Editar
         </Button>
-        <Button variant="outlined" color="error" onClick={onDeleteContact} >
+        <Button disabled={areButtonsActive} variant="outlined" color="error" onClick={onDeleteContact} >
           Borrar
         </Button>
       </Box>

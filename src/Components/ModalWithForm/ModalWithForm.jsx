@@ -1,20 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { v4 as uuid } from 'uuid';
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 import InputFile from "../InputFile";
 
-const ModalWithForm = ({ openModal, handleCloseModal, addContact }) => {
-  const [contact, setContact] = useState({});
+const ModalWithForm = ({ 
+  openModal = false, 
+  handleCloseModal = () => {}, 
+  modalFunction = () => {}, 
+  selectedContact = {},
+}) => {
+  const [contact, setContact] = useState({ _id:uuid()});
 
   const handleChange = event => {
     const { name, value } = event.target;
-    setContact(preventState => ({ ...preventState, [name]: value }));
+    setContact({ ...contact, [name]: value });
   };
 
   const handleSubmit = () => {
-    addContact(contact);
+    modalFunction(contact);
     handleCloseModal();
     setContact({})
   };
+
+  useEffect(()=>{
+    if(openModal) setContact({ ...selectedContact})
+  }, [openModal])
 
   return (
       <Modal
@@ -36,6 +46,7 @@ const ModalWithForm = ({ openModal, handleCloseModal, addContact }) => {
             alignItems:'center'
           }}
         >
+          
           <Typography variant="h6" sx={{ marginTop:2, marginBottom:2 }}>
             Datos:
           </Typography>
@@ -43,7 +54,7 @@ const ModalWithForm = ({ openModal, handleCloseModal, addContact }) => {
             label="Nombre"
             name="nombre"
             size="small"
-            value={contact.nombre || ''}
+            value={contact?.nombre || '' }
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -55,7 +66,7 @@ const ModalWithForm = ({ openModal, handleCloseModal, addContact }) => {
             name="numero"
             size="small"
             type="number"
-            value={contact.numero || ''}
+            value={contact?.numero || ''}
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -66,14 +77,19 @@ const ModalWithForm = ({ openModal, handleCloseModal, addContact }) => {
             label="Direccion"
             name="direccion"
             size="small"
-            value={contact.direccion || ''}
+            value={contact?.direccion || ''}
             onChange={handleChange}
             sx={{
               width: '300px',
               marginBottom:1
             }}
           />
-          <InputFile label={'Imagen'} onChange={handleChange} name={'img'} contact={contact.img || ''} />
+          <InputFile 
+            label={'Imagen'} 
+            onChange={handleChange} 
+            name={'img'} 
+            value={ selectedContact.img } 
+          />
           <Button 
             variant="contained"
             onClick={handleSubmit} 
