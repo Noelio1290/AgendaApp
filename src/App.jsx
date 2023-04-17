@@ -53,6 +53,10 @@ function App() {
     setSelectedContact({});
   };
 
+  const onDeleteContact = () => {
+    deleteContact(selectedContact);
+  };
+
   //Set SeletedContact
   const [selectedContact, setSelectedContact] = useState({});
 
@@ -100,8 +104,7 @@ function App() {
           <ButtonSection 
             handleOpenModal={handleOpenModal} 
             handleOpenModalEdit={handleOpenModalEdit}
-            selectedContact={selectedContact} 
-            deleteContact={deleteContact}
+            onDeleteContact={onDeleteContact}
             areButtonsActive={areButtonsActive}
           />
         </Box>

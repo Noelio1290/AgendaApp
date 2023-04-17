@@ -5,14 +5,9 @@ const ButtonSection = (
   { 
     handleOpenModal, 
     handleOpenModalEdit, 
-    selectedContact, 
-    deleteContact, 
+    onDeleteContact, 
     areButtonsActive,
   }) => {
-  
-  const onDeleteContact = () => {
-    deleteContact(selectedContact);
-  };
 
   return (
     <Box 
