@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardOverflow, AspectRatio, Typography } from '@mui/joy';
 import { Box } from '@mui/material';
 
-const ShowContact = ({ contact = {} }) => {
+const SelectedContactWindow = ({ contact = {} }) => {
 
   return (
     <Card 
@@ -38,4 +38,4 @@ const ShowContact = ({ contact = {} }) => {
   );
 };
 
-export default ShowContact;
+export default SelectedContactWindow;

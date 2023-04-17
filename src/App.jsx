@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Box, Container, Typography } from '@mui/material';
 import ContactList from './Components/ContactList';
-import ShowContact from './Components/ShowContact';
+import SelectedContactWindow from './Components/SelectedContactWindow';
 import ButtonSection from './Components/ButtonsSection';
 import ModalWithForm from './Components/ModalWithForm';
 
@@ -96,7 +96,7 @@ function App() {
           <ContactList contactsList={contactsList} onCardClick={onCardClick} />
         </Box>
         <Box sx={{  }}>
-          <ShowContact contact={selectedContact} />
+          <SelectedContactWindow contact={selectedContact} />
           <ButtonSection 
             handleOpenModal={handleOpenModal} 
             handleOpenModalEdit={handleOpenModalEdit}
