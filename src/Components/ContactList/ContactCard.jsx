@@ -41,7 +41,7 @@ const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
             alignItems:'center' 
           }}
         >
-          {contact.nombre}
+          {contact.name}
         </Typography>
       </CardContent>
     </Card>

@@ -25,13 +25,13 @@ const SelectedContactWindow = ({ contact = {} }) => {
       </CardOverflow>
       <Box sx={{ }}>
         <Typography variant="h6" sx={{ color: 'white', fontSize:22 }}>
-          {contact.nombre}
+          {contact.name}
         </Typography>
         <Typography variant="h6" sx={{ color: 'white', fontSize:16 }}>
-          Numero: {contact.numero}
+          Numero: {contact.number}
         </Typography>
         <Typography variant="h6" sx={{ color: 'white', fontSize: 16 }}>
-          Direccion: {contact.direccion}
+          Direccion: {contact.address}
         </Typography>
       </Box>
     </Card>

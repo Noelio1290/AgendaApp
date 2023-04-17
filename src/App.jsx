@@ -11,23 +11,23 @@ function App() {
   const [ contactsList,setContactList ] = useState([
     {
       _id:'f610d4d9-b9ab-4f6f-aad7-85d115090c3c',
-      nombre: 'Noel Zamora Islas',
-      numero: 5583637930,
-      direccion: 'Poniente 2 #40 AMSA',
+      name: 'Noel Zamora Islas',
+      number: 5583637930,
+      address: 'Poniente 2 #40 AMSA',
       img:'https://c4.wallpaperflare.com/wallpaper/830/266/321/anime-one-piece-monkey-d-luffy-wallpaper-preview.jpg'
     },
     {
       _id:'48f6f291-830b-41b3-a637-c66e0ffa10f0',
-      nombre: 'Monserrat Gordillo Soriano',
-      numero: 5559609969,
-      direccion: 'Poniente 2 #40 AMSA',
+      name: 'Monserrat Gordillo Soriano',
+      number: 5559609969,
+      address: 'Poniente 2 #40 AMSA',
       img:'https://c4.wallpaperflare.com/wallpaper/700/719/787/anime-one-piece-nico-robin-wallpaper-preview.jpg'
     },
     {
       _id:'191eeae5-c1b9-47d4-9833-bae6cca97d6c',
-      nombre: 'Armando',
-      numero: 5538595115,
-      direccion: 'Espiridion Moreno 103 Constitucion de laRepublica',
+      name: 'Armando',
+      number: 5538595115,
+      address: 'Espiridion Moreno 103 Constitucion de laRepublica',
       img:'https://c4.wallpaperflare.com/wallpaper/308/561/294/one-piece-wallpaper-preview.jpg'
     },
   ]);
@@ -48,7 +48,7 @@ function App() {
   }
 
   const deleteContact = (contact) => {
-    const updatedContacts = contactsList.filter(Contact => Contact.nombre !== contact.nombre);
+    const updatedContacts = contactsList.filter(Contact => Contact._id !== contact._id);
     setContactList(updatedContacts);
     setSelectedContact({});
   };

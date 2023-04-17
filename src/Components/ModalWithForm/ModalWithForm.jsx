@@ -52,9 +52,9 @@ const ModalWithForm = ({
           </Typography>
           <TextField
             label="Nombre"
-            name="nombre"
+            name="name"
             size="small"
-            value={contact?.nombre || '' }
+            value={contact?.name || '' }
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -63,10 +63,10 @@ const ModalWithForm = ({
           />
           <TextField
             label="Numero"
-            name="numero"
+            name="number"
             size="small"
             type="number"
-            value={contact?.numero || ''}
+            value={contact?.number || ''}
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -75,9 +75,9 @@ const ModalWithForm = ({
           />
           <TextField
             label="Direccion"
-            name="direccion"
+            name="address"
             size="small"
-            value={contact?.direccion || ''}
+            value={contact?.address || ''}
             onChange={handleChange}
             sx={{
               width: '300px',
