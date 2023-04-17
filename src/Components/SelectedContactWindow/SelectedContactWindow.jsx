@@ -17,22 +17,34 @@ const SelectedContactWindow = ({ contact = {} }) => {
     >
       <CardOverflow>
         <AspectRatio ratio="2">
-          <img
+          {!contact.img ? 
+            <></> 
+            : 
+            <img
             src={contact.img}
             alt=""
-          />
+            />
+          }
         </AspectRatio>
       </CardOverflow>
       <Box sx={{ }}>
         <Typography variant="h6" sx={{ color: 'white', fontSize:22 }}>
           {contact.name}
         </Typography>
-        <Typography variant="h6" sx={{ color: 'white', fontSize:16 }}>
-          Numero: {contact.number}
-        </Typography>
-        <Typography variant="h6" sx={{ color: 'white', fontSize: 16 }}>
-          Direccion: {contact.address}
-        </Typography>
+        {!contact.number ? 
+          <></> 
+          :
+          <Typography variant="h6" sx={{ color: 'white', fontSize:16 }}>
+            Numero: {contact.number}
+          </Typography>
+        }
+        {!contact.address ?
+          <></>
+          :
+          <Typography variant="h6" sx={{ color: 'white', fontSize: 16 }}>
+            Direccion: {contact.address}
+          </Typography>
+        }
       </Box>
     </Card>
   );
