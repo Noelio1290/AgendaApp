@@ -1,0 +1,77 @@
+[debug] [2024-01-02T21:01:28.304Z] ----------------------------------------------------------------------
+[debug] [2024-01-02T21:01:28.309Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Dell 7390\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --import=FirebaseEmulatorsData --export-on-exit=FirebaseEmulatorsData
+[debug] [2024-01-02T21:01:28.310Z] CLI Version:   12.7.0
+[debug] [2024-01-02T21:01:28.310Z] Platform:      win32
+[debug] [2024-01-02T21:01:28.311Z] Node Version:  v18.13.0
+[debug] [2024-01-02T21:01:28.327Z] Time:          Tue Jan 02 2024 15:01:28 GMT-0600 (GMT-06:00)
+[debug] [2024-01-02T21:01:28.327Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-01-02T21:01:28.692Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-01-02T21:01:28.693Z] > authorizing via signed-in user (noelio1290@gmail.com)
+[debug] [2024-01-02T21:01:28.908Z] java version "19.0.2" 2023-01-17
+Java(TM) SE Runtime Environment (build 19.0.2+7-44)
+
+[debug] [2024-01-02T21:01:28.908Z] Java HotSpot(TM) 64-Bit Server VM (build 19.0.2+7-44, mixed mode, sharing)
+
+[debug] [2024-01-02T21:01:28.922Z] Parsed Java major version: 19
+[info] i  emulators: Starting emulators: auth, firestore, hosting, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore, hosting, storage"}}
+[debug] [2024-01-02T21:01:28.957Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-01-02T21:01:28.957Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-01-02T21:01:28.958Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-01-02T21:01:28.958Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-01-02T21:01:28.958Z] [hosting] Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-01-02T21:01:28.958Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-01-02T21:01:28.959Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":6002},{"address":"::1","family":"IPv6","port":6002}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":6003}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":6004}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"hosting":[{"address":"127.0.0.1","family":"IPv4","port":6001}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":6005}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2024-01-02T21:01:29.048Z] [hub] writing locator at C:\Users\DELL73~1\AppData\Local\Temp\hub-agendaapp-adb79.json
+[info] i  firestore: Importing data from C:\Users\Dell 7390\Desktop\AgendaApp\FirebaseEmulatorsData\firestore_export\firestore_export.overall_export_metadata {"metadata":{"emulator":{"name":"firestore"},"message":"Importing data from C:\\Users\\Dell 7390\\Desktop\\AgendaApp\\FirebaseEmulatorsData\\firestore_export\\firestore_export.overall_export_metadata"}}
+[debug] [2024-01-02T21:01:29.097Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-01-02T21:01:29.097Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2024-01-02T21:01:29.097Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\Dell 7390\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.18.2.jar","--host","127.0.0.1","--port",6004,"--websocket_port",9150,"--project_id","agendaapp-adb79","--seed_from_export","C:\\Users\\Dell 7390\\Desktop\\AgendaApp\\FirebaseEmulatorsData\\firestore_export\\firestore_export.overall_export_metadata","--rules","C:\\Users\\Dell 7390\\Desktop\\AgendaApp\\firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\Dell 7390\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.18.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",6004,\"--websocket_port\",9150,\"--project_id\",\"agendaapp-adb79\",\"--seed_from_export\",\"C:\\\\Users\\\\Dell 7390\\\\Desktop\\\\AgendaApp\\\\FirebaseEmulatorsData\\\\firestore_export\\\\firestore_export.overall_export_metadata\",\"--rules\",\"C:\\\\Users\\\\Dell 7390\\\\Desktop\\\\AgendaApp\\\\firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[info] i  auth: Importing config from C:\Users\Dell 7390\Desktop\AgendaApp\FirebaseEmulatorsData\auth_export\config.json {"metadata":{"emulator":{"name":"auth"},"message":"Importing config from C:\\Users\\Dell 7390\\Desktop\\AgendaApp\\FirebaseEmulatorsData\\auth_export\\config.json"}}
+[info] i  auth: Importing accounts from C:\Users\Dell 7390\Desktop\AgendaApp\FirebaseEmulatorsData\auth_export\accounts.json {"metadata":{"emulator":{"name":"auth"},"message":"Importing accounts from C:\\Users\\Dell 7390\\Desktop\\AgendaApp\\FirebaseEmulatorsData\\auth_export\\accounts.json"}}
+[debug] [2024-01-02T21:01:49.098Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2024-01-02T21:01:50.461Z] Temp file directory for storage emulator: C:\Users\DELL73~1\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\DELL73~1\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[debug] [2024-01-02T21:01:50.500Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/agendaapp-adb79/sites 
+[debug] [2024-01-02T21:01:51.479Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/agendaapp-adb79/sites 200
+[debug] [2024-01-02T21:01:51.479Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/agendaapp-adb79/sites {"sites":[{"name":"projects/agendaapp-adb79/sites/agendaapp-adb79","defaultUrl":"https://agendaapp-adb79.web.app","type":"DEFAULT_SITE"}]}
+[debug] [2024-01-02T21:01:51.480Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/agendaapp-adb79/webApps/-/config [none]
+[debug] [2024-01-02T21:01:51.935Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/agendaapp-adb79/webApps/-/config 200
+[debug] [2024-01-02T21:01:51.936Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/agendaapp-adb79/webApps/-/config {"projectId":"agendaapp-adb79","appId":"1:1050160408903:web:7879a099146dce0de90462","storageBucket":"agendaapp-adb79.appspot.com","locationId":"us-central","apiKey":"AIzaSyA8jXfyhSrj_i2F2a1PGb5F7WHi76PgXJs","authDomain":"agendaapp-adb79.firebaseapp.com","messagingSenderId":"1050160408903"}
+[debug] [2024-01-02T21:01:51.955Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/agendaapp-adb79 [none]
+[debug] [2024-01-02T21:01:52.174Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/agendaapp-adb79 200
+[debug] [2024-01-02T21:01:52.175Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/agendaapp-adb79 {"projectId":"agendaapp-adb79","projectNumber":"1050160408903","displayName":"AgendaAPp","name":"projects/agendaapp-adb79","resources":{"hostingSite":"agendaapp-adb79","storageBucket":"agendaapp-adb79.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_def81943-745f-46a4-9756-cf7347f0bf65"}
+[debug] [2024-01-02T21:01:52.177Z] Specified "public" directory "dist" does not exist; Deploy to Hosting site "agendaapp-adb79" may fail or be empty.
+[info] i  hosting[agendaapp-adb79]: Serving hosting files from: dist {"metadata":{"emulator":{"name":"hosting"},"message":"Serving hosting files from: \u001b[1mdist\u001b[22m"}}
+[info] +  hosting[agendaapp-adb79]: Local server: http://127.0.0.1:6001 {"metadata":{"emulator":{"name":"hosting"},"message":"Local server: \u001b[4m\u001b[1mhttp://127.0.0.1:6001\u001b[22m\u001b[24m"}}
+[debug] [2024-01-02T21:01:52.325Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-01-02T21:01:52.326Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2024-01-02T21:01:52.326Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Dell 7390\\.cache\\firebase\\emulators\\ui-v1.11.7\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Dell 7390\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.7\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2024-01-02T21:01:53.149Z] Web / API server started at 127.0.0.1:6002
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:6002\n"}}
+[debug] [2024-01-02T21:01:53.149Z] Web / API server started at ::1:6002
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:6002\n"}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:6002/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:6003 │ http://127.0.0.1:6002/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:6004 │ http://127.0.0.1:6002/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Hosting        │ 127.0.0.1:6001 │ n/a                             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ 127.0.0.1:6005 │ http://127.0.0.1:6002/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 

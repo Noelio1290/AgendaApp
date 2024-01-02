@@ -1,39 +1,43 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import ContactList from './Components/ContactList';
 import SelectedContactWindow from './Components/SelectedContactWindow';
 import ButtonSection from './Components/ButtonsSection';
 import ModalWithForm from './Components/ModalWithForm';
+import { collection, getDocs, addDoc } from "firebase/firestore";
+import { db } from './firebase/firebase';
 
 function App() {
   //Set ContactList
-  const [ contactsList,setContactList ] = useState([
-    {
-      _id:'f610d4d9-b9ab-4f6f-aad7-85d115090c3c',
-      name: 'Noel Zamora Islas',
-      number: 5583637930,
-      address: 'Poniente 2 #40 AMSA',
-      img:'https://c4.wallpaperflare.com/wallpaper/830/266/321/anime-one-piece-monkey-d-luffy-wallpaper-preview.jpg'
-    },
-    {
-      _id:'48f6f291-830b-41b3-a637-c66e0ffa10f0',
-      name: 'Monserrat Gordillo Soriano',
-      number: 5559609969,
-      address: 'Poniente 2 #40 AMSA',
-      img:'https://c4.wallpaperflare.com/wallpaper/700/719/787/anime-one-piece-nico-robin-wallpaper-preview.jpg'
-    },
-    {
-      _id:'191eeae5-c1b9-47d4-9833-bae6cca97d6c',
-      name: 'Armando',
-      number: 5538595115,
-      address: 'Espiridion Moreno 103 Constitucion de laRepublica',
-      img:'https://c4.wallpaperflare.com/wallpaper/308/561/294/one-piece-wallpaper-preview.jpg'
-    },
-  ]);
+  const [ contactsList,setContactList ] = useState([]);
+
+
+  useEffect(() => {
+
+    const contactsListRef = collection(db, "ContactsList");
+    getDocs(contactsListRef)
+    .then((resp) => {
+
+      setContactList(
+        resp.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id}
+        } )
+      )
+    })
+
+  },[contactsList])
 
   const addContact = (contact) => {
-    setContactList([ ...contactsList, contact ])
+    const contactsListRef = collection(db, "ContactsList");
+    addDoc(contactsListRef, contact)
+    getDocs(contactsListRef)
+    .then((resp) => {
+      setContactList(
+        resp.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id}
+        } )
+      )
+    })
   };
   
   const editContact = (contact) => {

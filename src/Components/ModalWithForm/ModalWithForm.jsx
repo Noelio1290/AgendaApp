@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuid } from 'uuid';
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 import InputFile from "../InputFile";
+import { uploadFile } from '../../firebase/firebase';
 
 const ModalWithForm = ({ 
   openModal = false, 
@@ -12,13 +13,16 @@ const ModalWithForm = ({
   const [contact, setContact] = useState({ _id:uuid()});
 
   const handleChange = event => {
-    const { name, value } = event.target;
+    const { name, value} = event.target;
     setContact({ ...contact, [name]: value });
   };
 
+  console.log(contact);
+
   const handleSubmit = () => {
     modalFunction(contact);
-    handleCloseModal();
+    uploadFile()
+    handleCloseModal(contact.img,);
     setContact({})
   };
 
