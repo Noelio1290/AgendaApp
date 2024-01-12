@@ -4,44 +4,27 @@ import ContactList from './Components/ContactList';
 import SelectedContactWindow from './Components/SelectedContactWindow';
 import ButtonSection from './Components/ButtonsSection';
 import ModalWithForm from './Components/ModalWithForm';
-import { collection, getDocs, addDoc } from "firebase/firestore";
-import { db } from './firebase/firebase';
+import { getContactList, addContact } from './firebase/firebase'
 
 function App() {
   //Set ContactList
-  const [ contactsList,setContactList ] = useState([]);
+  const [ contactList,setContactList ] = useState([]);
 
 
   useEffect(() => {
-
-    const contactsListRef = collection(db, "ContactsList");
-    getDocs(contactsListRef)
-    .then((resp) => {
-
-      setContactList(
-        resp.docs.map((doc) => {
-          return { ...doc.data(), id: doc.id}
-        } )
-      )
-    })
-
-  },[contactsList])
-
-  const addContact = (contact) => {
-    const contactsListRef = collection(db, "ContactsList");
-    addDoc(contactsListRef, contact)
-    getDocs(contactsListRef)
-    .then((resp) => {
-      setContactList(
-        resp.docs.map((doc) => {
-          return { ...doc.data(), id: doc.id}
-        } )
-      )
-    })
-  };
+    const fetchData = async () => {
+    const contactListSnapshot = await getContactList();
+    const formattedContactList = contactListSnapshot.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
+    }));
+    setContactList(formattedContactList);
+    }
+    fetchData();
+  }, []);
   
   const editContact = (contact) => {
-    const updatedContacts = contactsList.map(contactIndex => {
+    const updatedContacts = contactList.map(contactIndex => {
       if (contactIndex._id === contact._id) {
         return contact;
       }
@@ -52,7 +35,7 @@ function App() {
   }
 
   const deleteContact = (contact) => {
-    const updatedContacts = contactsList.filter(Contact => Contact._id !== contact._id);
+    const updatedContacts = contactList.filter(Contact => Contact._id !== contact._id);
     setContactList(updatedContacts);
     setSelectedContact({});
   };
@@ -87,6 +70,7 @@ function App() {
         openModal={openModal} 
         handleCloseModal={handleCloseModal} 
         modalFunction={addContact}
+        setContactList={setContactList}
       />
       <ModalWithForm 
         openModal={openModalEdit} 
@@ -101,7 +85,7 @@ function App() {
       </Box>
       <Box sx={{ display:'flex', flexDirection:'Row', justifyContent:'space-evenly', flexWrap:'wrap' }}>
         <Box sx={{  }}>
-          <ContactList contactsList={contactsList} onCardClick={onCardClick} />
+          <ContactList contactsList={contactList} onCardClick={onCardClick} />
         </Box>
         <Box sx={{  }}>
           <SelectedContactWindow contact={selectedContact} />

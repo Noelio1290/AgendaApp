@@ -2,33 +2,38 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuid } from 'uuid';
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 import InputFile from "../InputFile";
-import { uploadFile } from '../../firebase/firebase';
+import { getContactList } from "../../firebase/firebase";
 
 const ModalWithForm = ({ 
   openModal = false, 
   handleCloseModal = () => {}, 
   modalFunction = () => {}, 
   selectedContact = {},
+  setContactList = () => {},
 }) => {
-  const [contact, setContact] = useState({ _id:uuid()});
+  const [contact, setContact] = useState({ _id:uuid() });
 
   const handleChange = event => {
     const { name, value} = event.target;
     setContact({ ...contact, [name]: value });
   };
 
-  console.log(contact);
-
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     modalFunction(contact);
-    uploadFile()
-    handleCloseModal(contact.img,);
-    setContact({})
+    const contactListSnapshot = await getContactList();
+    const formattedContactList = contactListSnapshot.docs.map(doc => ({
+      ...doc.data(),
+      id: doc.id
+    }));
+    setContactList(formattedContactList);
+    handleCloseModal();
+    setContact({ _id:uuid() });
   };
 
   useEffect(()=>{
     if(openModal) setContact({ ...selectedContact})
-  }, [openModal])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
       <Modal
