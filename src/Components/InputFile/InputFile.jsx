@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
 
 const InputFile = ({ onChange = () => {}, label = '', name = '', value ='' }) => {
   const [selectedImage, setSelectedImage] = useState(value);
+  useEffect(() => {
+    if (value !== '') {
+      setSelectedImage(value);
+    }
+  }, [value]);
+  
+  console.log(value);
+  console.log(selectedImage);
   
   const selectFile = event => {
-    const selectImagen = URL.createObjectURL(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    const selectImagen = URL.createObjectURL(selectedFile);
     setSelectedImage(selectImagen);
     onChange({ target: { name, value: selectImagen } });
   }; 

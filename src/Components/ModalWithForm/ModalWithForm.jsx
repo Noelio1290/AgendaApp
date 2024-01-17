@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuid } from 'uuid';
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 import InputFile from "../InputFile";
@@ -8,32 +8,47 @@ const ModalWithForm = ({
   openModal = false, 
   handleCloseModal = () => {}, 
   modalFunction = () => {}, 
-  selectedContact = {},
   setContactList = () => {},
+  label = '',
+  selectedContact = {},
+  setSelectedContact = () => {},
 }) => {
   const [contact, setContact] = useState({ _id:uuid() });
 
+  console.log(contact, label);
+
+  useEffect(() => {
+    if (openModal && label === 'Editando') {
+      setContact({ ...selectedContact });
+    }
+  }, [openModal, label, selectedContact]);
+
   const handleChange = event => {
-    const { name, value} = event.target;
-    setContact({ ...contact, [name]: value });
+    const { name, value } = event.target;
+    setContact((prevContact) => ({ ...prevContact, [name]: value }));
   };
 
   const handleSubmit = async () => {
-    modalFunction(contact);
-    const contactListSnapshot = await getContactList();
-    const formattedContactList = contactListSnapshot.docs.map(doc => ({
-      ...doc.data(),
-      id: doc.id
-    }));
-    setContactList(formattedContactList);
-    handleCloseModal();
-    setContact({ _id:uuid() });
+    try {
+      await modalFunction(contact);
+      const contactListSnapshot = await getContactList();
+      const formattedContactList = contactListSnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      }));
+      console.log(formattedContactList);
+      setContactList(formattedContactList);
+      setSelectedContact({});
+      handleCloseModal();
+      setContact({ _id: uuid() });
+    } catch (error) {
+      console.error("Error al guardar el contacto:", error);
+    }
   };
-
   useEffect(()=>{
-    if(openModal) setContact({ ...selectedContact})
+    if(openModal && label === 'Editando') setContact({ ...selectedContact})
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [openModal])
 
   return (
       <Modal
@@ -97,7 +112,7 @@ const ModalWithForm = ({
             label={'Imagen'} 
             onChange={handleChange} 
             name={'img'} 
-            value={ selectedContact.img } 
+            value={ contact?.img || '' } 
           />
           <Button 
             variant="contained"

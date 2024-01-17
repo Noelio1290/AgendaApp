@@ -4,12 +4,11 @@ import ContactList from './Components/ContactList';
 import SelectedContactWindow from './Components/SelectedContactWindow';
 import ButtonSection from './Components/ButtonsSection';
 import ModalWithForm from './Components/ModalWithForm';
-import { getContactList, addContact } from './firebase/firebase'
+import { getContactList, addContact, editContact } from './firebase/firebase'
 
 function App() {
   //Set ContactList
   const [ contactList,setContactList ] = useState([]);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,17 +21,6 @@ function App() {
     }
     fetchData();
   }, []);
-  
-  const editContact = (contact) => {
-    const updatedContacts = contactList.map(contactIndex => {
-      if (contactIndex._id === contact._id) {
-        return contact;
-      }
-      return contactIndex;
-    });
-    setContactList(updatedContacts);
-    setSelectedContact(contact)
-  }
 
   const deleteContact = (contact) => {
     const updatedContacts = contactList.filter(Contact => Contact._id !== contact._id);
@@ -71,12 +59,16 @@ function App() {
         handleCloseModal={handleCloseModal} 
         modalFunction={addContact}
         setContactList={setContactList}
+        label= 'Creando'
       />
       <ModalWithForm 
         openModal={openModalEdit} 
         handleCloseModal={handleCloseModalEdit}
-        selectedContact={selectedContact}
         modalFunction={editContact}
+        setContactList={setContactList}
+        label= 'Editando'
+        selectedContact={selectedContact}
+        setSelectedContact={setSelectedContact}
       />
       <Box>
         <Typography variant='h6' sx={{ textAlign: 'center', fontSize: 70, fontFamily:'inherit', }}>
