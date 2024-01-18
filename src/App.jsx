@@ -11,17 +11,12 @@ function App() {
 
   const initialState = {
     contactList:[],
-    selectedContact: {
-      _id: uuid(),
-      address:'',
-      img: '',
-      name: '',
-      number: '',
-    },
+    selectedContact: {},
   };
 
   const actions = {
     SET_LIST: 'SET_LIST',
+    SET_NEW_CONTACT: 'SET_NEW_CONTACT',
     SET_CHANGE_CONTACT: 'SET_CHANGE_CONTACT',
     SET_SELECTED_CONTACT: 'SET_SELECTED_CONTACT',
     RESET_SELECTED_CONTACT: 'RESET_SELECTED_CONTACT',
@@ -33,6 +28,17 @@ function App() {
         return { 
           ...state,
           contactList: action.file
+        };
+      case actions.SET_NEW_CONTACT:
+        return { 
+          ...state,
+          selectedContact: {
+            _id: uuid(),
+            address:'',
+            img: '',
+            name: '',
+            number: '',
+          }
         };
       case actions.SET_CHANGE_CONTACT:
         const { name, value } = action;
@@ -51,14 +57,14 @@ function App() {
       case actions.RESET_SELECTED_CONTACT:
         return { 
           ...state,
-          selectedContact: {_id: uuid()}
+          selectedContact: {}
         };
       default:
         return state;
     }
   };
   
-  //Set ContactList
+  // Set ContactList
   const [ state, dispatch] = useReducer(reducer, initialState);
 
   const { contactList, selectedContact } = state;
@@ -81,6 +87,7 @@ function App() {
     fetchData();
   }, [actions.SET_LIST]);
 
+  // Handler Modal
   const handleChangeModal = event => {
     const { name, value } = event.target;
     dispatch({
@@ -89,7 +96,20 @@ function App() {
       value: value,
     });
   };
+  
+  // Set Modal
+  const [ openModal, setOpenModal ] = useState(false);
 
+  const handleOpenModal = () => {
+    dispatch({ type: actions.SET_NEW_CONTACT });
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    dispatch({ type: actions.RESET_SELECTED_CONTACT });
+    setOpenModal(false);
+  };
+
+  
   const handleSubmitCreate = async () => {
     try {
       await addContact(selectedContact);
@@ -98,8 +118,29 @@ function App() {
         ...doc.data()
       }));
       dispatch({ type: actions.SET_LIST, file: formattedContactList });
-      dispatch({ type: actions.RESET_SELECTED_CONTACT });
+      dispatch({ type: actions.RESET_SELECTED_CONTACT});
       handleCloseModal();
+    } catch (error) {
+      console.error("Error al guardar el contacto:", error);
+    }
+  };
+
+  //Set Modal edit
+  const [ openModalEdit, setOpenModalEdit ] = useState(false);
+
+  const handleOpenModalEdit = () => setOpenModalEdit(true);
+  const handleCloseModalEdit = () => setOpenModalEdit(false);
+
+  const handleSubmitEdit = async () => {
+    try {
+      await editContact(selectedContact);
+      const contactListSnapshot = await getContactList();
+      const formattedContactList = contactListSnapshot.docs.map(doc => ({
+        ...doc.data()
+      }));
+      dispatch({ type: actions.SET_LIST, file: formattedContactList });
+      dispatch({ type: actions.RESET_SELECTED_CONTACT});
+      handleCloseModalEdit();
     } catch (error) {
       console.error("Error al guardar el contacto:", error);
     }
@@ -108,7 +149,9 @@ function App() {
   const onCardClick = (contact) => {
     dispatch({ type: actions.SET_SELECTED_CONTACT, file: contact })
   };
-
+  
+  //Set buttons active
+  const areButtonsActive = Object.keys(selectedContact).length > 0 ;
 
 
   //
@@ -123,20 +166,6 @@ function App() {
     deleteContact(selectedContact);
   };
 
-  //Set buttons active
-  const areButtonsActive = Object.keys(selectedContact).length > 1 ;
-  console.log(areButtonsActive);
-
-  //Set Modal
-  const [ openModal, setOpenModal ] = useState(false);
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
-
-   //Set Modal edit
-   const [ openModalEdit, setOpenModalEdit ] = useState(false);
-   const handleOpenModalEdit = () => setOpenModalEdit(true);
-   const handleCloseModalEdit = () => setOpenModalEdit(false);
-
   return (
     <Container>
       <ModalWithForm
@@ -150,11 +179,9 @@ function App() {
       <ModalWithForm 
         openModal={openModalEdit} 
         handleCloseModal={handleCloseModalEdit}
-        modalFunction={editContact}
-        setContactList={dispatch}
-        label= 'Editando'
-        selectedContact={selectedContact}
-        setSelectedContact={dispatch}
+        value={selectedContact}
+        handleChange={handleChangeModal}
+        modalFunction={handleSubmitEdit}
       />
       <Box>
         <Typography variant='h6' sx={{ textAlign: 'center', fontSize: 70, fontFamily:'inherit', }}>

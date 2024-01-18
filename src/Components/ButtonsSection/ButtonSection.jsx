@@ -6,7 +6,7 @@ const ButtonSection = (
     handleOpenModal, 
     handleOpenModalEdit, 
     onDeleteContact, 
-    areButtonsActive,
+    areButtonsActive = false,
   }) => {
 
   return (
@@ -31,10 +31,10 @@ const ButtonSection = (
         <Button variant="outlined" color="success" onClick={handleOpenModal} >
           Crear
         </Button>
-        <Button disabled={areButtonsActive} variant="outlined" onClick={handleOpenModalEdit} sx={{ margin:1 }} >
+        <Button disabled={!areButtonsActive} variant="outlined" onClick={handleOpenModalEdit} sx={{ margin:1 }} >
           Editar
         </Button>
-        <Button disabled={areButtonsActive} variant="outlined" color="error" onClick={onDeleteContact} >
+        <Button disabled={!areButtonsActive} variant="outlined" color="error" onClick={onDeleteContact} >
           Borrar
         </Button>
       </Box>

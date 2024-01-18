@@ -32,7 +32,7 @@ const ModalWithForm = ({
         >
           
           <Typography variant="h6" sx={{ marginTop:2, marginBottom:2 }}>
-            Datos:
+          {isCreating ? 'Crear Contacto' : 'Editar Contacto'}
           </Typography>
           <TextField
             label="Nombre"
@@ -78,7 +78,7 @@ const ModalWithForm = ({
             variant="contained"
             onClick={modalFunction} 
           >
-            Guardar
+            {isCreating ? 'Crear' : 'Editar'}
           </Button>
         </Box>
       </Modal>
