@@ -52,7 +52,6 @@ export const addContact = async (contact) => {
 export const editContact = async (updatedContact) => {
     // Verificar si hay una nueva imagen para subir
     if (updatedContact.img.startsWith("blob:")) {
-      console.log('its blob')
       // Convertir la URL de Blob a un objeto Blob
       const response = await fetch(updatedContact.img);
       const blob = await response.blob();
@@ -70,7 +69,6 @@ export const editContact = async (updatedContact) => {
       const url = await getDownloadURL(storageRef);
       // Contact URL is modified to update it
       const contactWithURL = { ...updatedContact, img: url };
-      console.log(contactWithURL);
 
       const contactRef = doc(db, 'ContactsList', updatedContact._id);
       updateDoc(contactRef, contactWithURL);

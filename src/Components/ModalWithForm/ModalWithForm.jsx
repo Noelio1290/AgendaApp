@@ -1,55 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { v4 as uuid } from 'uuid';
+import React from "react";
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 import InputFile from "../InputFile";
-import { getContactList } from "../../firebase/firebase";
 
 const ModalWithForm = ({ 
+  isCreating = false,
   openModal = false, 
-  handleCloseModal = () => {}, 
-  modalFunction = () => {}, 
-  setContactList = () => {},
-  label = '',
-  selectedContact = {},
-  setSelectedContact = () => {},
+  handleCloseModal, 
+  value = {},
+  handleChange = () => {},
+  modalFunction = () => {},
 }) => {
-  const [contact, setContact] = useState({ _id:uuid() });
-
-  console.log(contact, label);
-
-  useEffect(() => {
-    if (openModal && label === 'Editando') {
-      setContact({ ...selectedContact });
-    }
-  }, [openModal, label, selectedContact]);
-
-  const handleChange = event => {
-    const { name, value } = event.target;
-    setContact((prevContact) => ({ ...prevContact, [name]: value }));
-  };
-
-  const handleSubmit = async () => {
-    try {
-      await modalFunction(contact);
-      const contactListSnapshot = await getContactList();
-      const formattedContactList = contactListSnapshot.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id
-      }));
-      console.log(formattedContactList);
-      setContactList(formattedContactList);
-      setSelectedContact({});
-      handleCloseModal();
-      setContact({ _id: uuid() });
-    } catch (error) {
-      console.error("Error al guardar el contacto:", error);
-    }
-  };
-  useEffect(()=>{
-    if(openModal && label === 'Editando') setContact({ ...selectedContact})
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openModal])
-
   return (
       <Modal
         open={openModal}
@@ -78,7 +38,7 @@ const ModalWithForm = ({
             label="Nombre"
             name="name"
             size="small"
-            value={contact?.name || '' }
+            value={value.name || '' }
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -90,7 +50,7 @@ const ModalWithForm = ({
             name="number"
             size="small"
             type="number"
-            value={contact?.number || ''}
+            value={value.number || ''}
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -101,7 +61,7 @@ const ModalWithForm = ({
             label="Direccion"
             name="address"
             size="small"
-            value={contact?.address || ''}
+            value={value.address || ''}
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -112,11 +72,11 @@ const ModalWithForm = ({
             label={'Imagen'} 
             onChange={handleChange} 
             name={'img'} 
-            value={ contact?.img || '' } 
+            value={ value.img || '' } 
           />
           <Button 
             variant="contained"
-            onClick={handleSubmit} 
+            onClick={modalFunction} 
           >
             Guardar
           </Button>

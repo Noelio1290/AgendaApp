@@ -9,8 +9,6 @@ const InputFile = ({ onChange = () => {}, label = '', name = '', value ='' }) =>
     }
   }, [value]);
   
-  console.log(value);
-  console.log(selectedImage);
   
   const selectFile = event => {
     const selectedFile = event.target.files[0];
