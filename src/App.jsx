@@ -5,7 +5,7 @@ import ContactList from './Components/ContactList';
 import SelectedContactWindow from './Components/SelectedContactWindow';
 import ButtonSection from './Components/ButtonsSection';
 import ModalWithForm from './Components/ModalWithForm';
-import { getContactList, addContact, editContact } from './firebase/firebase'
+import { getContactList, addContact, editContact, deleteContact } from './firebase/firebase'
 
 function App() {
 
@@ -68,8 +68,6 @@ function App() {
   const [ state, dispatch] = useReducer(reducer, initialState);
 
   const { contactList, selectedContact } = state;
-  console.log(contactList);
-  console.log(selectedContact);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -97,7 +95,7 @@ function App() {
     });
   };
   
-  // Set Modal
+  // Set Modal Create
   const [ openModal, setOpenModal ] = useState(false);
 
   const handleOpenModal = () => {
@@ -108,7 +106,6 @@ function App() {
     dispatch({ type: actions.RESET_SELECTED_CONTACT });
     setOpenModal(false);
   };
-
   
   const handleSubmitCreate = async () => {
     try {
@@ -142,29 +139,33 @@ function App() {
       dispatch({ type: actions.RESET_SELECTED_CONTACT});
       handleCloseModalEdit();
     } catch (error) {
-      console.error("Error al guardar el contacto:", error);
+      console.error("Error al editar el contacto:", error);
     }
   };
 
+  // Handler delete contact
+  const onDeleteContact = async () => {
+    try {
+      await deleteContact(selectedContact._id);
+      const contactListSnapshot = await getContactList();
+      const formattedContactList = contactListSnapshot.docs.map(doc => ({
+        ...doc.data()
+      }));
+      dispatch({ type: actions.SET_LIST, file: formattedContactList });
+      dispatch({ type: actions.RESET_SELECTED_CONTACT});
+      handleCloseModalEdit();
+    } catch (error) {
+      console.error("Error al borrar el contacto:", error);
+    }
+  };
+
+  // Set selected contact
   const onCardClick = (contact) => {
     dispatch({ type: actions.SET_SELECTED_CONTACT, file: contact })
   };
-  
+
   //Set buttons active
-  const areButtonsActive = Object.keys(selectedContact).length > 0 ;
-
-
-  //
-
-  const deleteContact = (contact) => {
-    const updatedContacts = contactList.filter(Contact => Contact._id !== contact._id);
-    dispatch(updatedContacts);
-    dispatch({});
-  };  
-
-  const onDeleteContact = () => {
-    deleteContact(selectedContact);
-  };
+  const areButtonsActive = Object.keys(selectedContact).length > 0 ; 
 
   return (
     <Container>

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { collection as firestoreCollection, getFirestore, connectFirestoreEmulator, collection, getDocs, setDoc, doc, updateDoc } from "firebase/firestore";
-import { getStorage, connectStorageEmulator, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection as firestoreCollection, getFirestore, connectFirestoreEmulator, collection, getDocs, setDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { getStorage, connectStorageEmulator, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import firebaseConfig, { isProduction } from './config';
 
 // Initialize Firebase
@@ -46,7 +46,6 @@ export const addContact = async (contact) => {
   const contactsListRef = firestoreCollection(db, "ContactsList");
   const contactDocRef = doc(contactsListRef, contact._id);
   await setDoc(contactDocRef, contactWithURL);
-  return contactWithURL;
 };
 
 export const editContact = async (updatedContact) => {
@@ -76,4 +75,20 @@ export const editContact = async (updatedContact) => {
       const contactRef = doc(db, 'ContactsList', updatedContact._id);
       updateDoc(contactRef, updatedContact);
     }
+};
+
+export const deleteContact = async (contactId) => {
+  try {
+    // Crear una referencia al documento del contacto en Firestore
+    const contactRef = doc(db, 'ContactsList', contactId);
+
+    // Eliminar el documento del contacto
+    await deleteDoc(contactRef);
+
+    // Eliminar la imagen asociada al contacto en Firebase Storage
+    const storageRef = ref(storage, `contacts/${contactId}`);
+    await deleteObject(storageRef);
+  } catch (error) {
+    console.error('Error deleting contact:', error.message);
+  }
 };
