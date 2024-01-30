@@ -15,26 +15,27 @@ const ButtonSection = (
         display:'flex', 
         flexDirection:'column',
         alignItems:'center',
-        border:'2px solid',
-        maxWidth:'312px',
-        width:'312px',
+        border:'1px solid',
+        borderColor: 'white',
+        maxWidth:'330px',
+        width:'350px',
         height:'120px',
-        backgroundColor: 'rgba(100, 100, 100, 0.2)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         borderRadius: '8px',
         marginBottom:2
       }}
     >
       <Box>
-        <Typography sx={{ textAlign: 'center', marginTop:2, fontSize: 22 }}>
+        <Typography sx={{ textAlign: 'center', color: 'white', marginTop:1, fontSize: 22 }}>
           Opciones:
         </Typography>
-        <Button variant="outlined" color="success" onClick={handleOpenModal} >
+        <Button variant="contained" color="success" onClick={handleOpenModal} >
           Crear
         </Button>
-        <Button disabled={!areButtonsActive} variant="outlined" onClick={handleOpenModalEdit} sx={{ margin:1 }} >
+        <Button disabled={!areButtonsActive} variant="contained" onClick={handleOpenModalEdit} sx={{ margin:1 }} >
           Editar
         </Button>
-        <Button disabled={!areButtonsActive} variant="outlined" color="error" onClick={onDeleteContact} >
+        <Button disabled={!areButtonsActive} variant="contained" color="error" onClick={onDeleteContact} >
           Borrar
         </Button>
       </Box>

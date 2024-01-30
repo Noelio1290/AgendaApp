@@ -9,16 +9,18 @@ const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
       variant="outlined" 
       sx={{ 
         display:'flex',
-        width: '260px', 
+        width: '90%', 
+        minWidth: '250px', 
+        maxWidth: '200px',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         border: 2, 
-        margin:1,
+        marginBottom: .5,
         cursor: 'pointer',
       }}
       onClick={() => onCardClick(contact)}
     >
       <CardOverflow>
-        <AspectRatio ratio="1" sx={{ width: '70px', marginRight:1 }}>
+        <AspectRatio ratio="1" sx={{ width: '60px', marginRight:1 }}>
           <img
             src={contact.img}
             alt=""
