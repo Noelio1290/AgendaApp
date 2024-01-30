@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardOverflow, AspectRatio, Typography } from '@mui/joy';
 import { Box } from '@mui/material';
 import Contact from '../../Contact.png';
+import noImage from '../../noImage.jpg';
 
 const SelectedContactWindow = ({ contact = {} }) => {
 
@@ -20,14 +21,14 @@ const SelectedContactWindow = ({ contact = {} }) => {
     >
       <CardOverflow>
         <AspectRatio ratio="2">
-          {contact.img ?
+          {contact.img === undefined ?
             <img
-            src={contact.img}
+            src={Contact}
             alt=""
             />
             :
             <img
-            src={Contact}
+            src={contact.img === '' ? noImage : contact.img}
             alt=""
             />
           }

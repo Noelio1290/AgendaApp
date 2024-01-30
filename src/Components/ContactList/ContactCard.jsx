@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, CardOverflow, AspectRatio, Typography, CardContent } from '@mui/joy';
+import noImage from '../../noImage.jpg';
 
 const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
 
@@ -22,7 +23,7 @@ const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
       <CardOverflow>
         <AspectRatio ratio="1" sx={{ width: '60px', marginRight:1 }}>
           <img
-            src={contact.img}
+            src={contact.img === '' ? noImage : contact.img }
             alt=""
           />
         </AspectRatio>
