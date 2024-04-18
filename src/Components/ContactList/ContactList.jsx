@@ -7,28 +7,55 @@ const ContactList = ({ contactsList = [], onCardClick = () => {}, }) => {
   return (
     <Box 
       sx={{ 
-        display:'flex', 
-        flexDirection:'column',
-        alignItems:'center',
-        border:'2px solid',
-        maxWidth:'320px',
-        width:'320px',
-        height:'420px',
-        backgroundColor: 'rgba(100, 100, 100, 0.2)',
-        overflow: 'auto',
-        marginBottom:1
+        display: 'flex', 
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '40%',
+        minWidth: '340px',
+        height: {
+          xs: '40vh',
+          sm: '75vh',
+          md: '75vh',
+          lg: '75vh',
+        },
+        border: '1px solid',
+        borderColor: 'white',
+        borderRadius: '10px',
+        background: 'transparent',
+        backdropFilter: 'blur(10px)',
+        paddingTop: 0.5,
+        paddingBottom: 0.5,
       }}
     >
-      <Typography variant="h6" sx={{ fontSize: 22, marginTop:1 }} >
+      <Typography 
+        variant="h6" 
+        sx={{ 
+          textAlign: 'center', 
+          fontFamily: 'Helvetica', 
+          color: 'white', 
+          fontSize: '2em', // Tamaño relativo del texto
+        }}
+      >
         Contactos:
       </Typography>
-      {contactsList.map((contact,key) => (
-        <ContactCard 
-          contact={contact} 
-          key={`contact_number_${key}`} 
-          onCardClick={onCardClick}
-        />
-      ))}
+      <Box 
+        sx={{
+          display: 'flex',
+          flexFlow: 'column',
+          alignItems: 'center',
+          width: '100%',
+          height: '100%',
+          overflowY: 'visible',
+          overflowX: 'hidden',
+        }}>
+        {contactsList.map((contact,key) => (
+          <ContactCard 
+            contact={contact} 
+            key={`contact_number_${key}`} 
+            onCardClick={onCardClick}
+          />
+        ))}
+      </Box>
     </Box>
   );
 };

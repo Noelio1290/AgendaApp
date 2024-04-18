@@ -1,0 +1,42 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "firestore": {
+      "port": 6004
+    },
+    "hosting": {
+      "port": 6001
+    },
+    "ui": {
+      "enabled": true,
+      "port": 6002
+    },
+    "singleProjectMode": true,
+    "auth": {
+      "port": 6003
+    },
+    "storage": {
+      "port": 6005
+    }
+  }
+}

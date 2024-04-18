@@ -1,31 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { v4 as uuid } from 'uuid';
+import React from "react";
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 import InputFile from "../InputFile";
 
 const ModalWithForm = ({ 
+  isCreating = false,
   openModal = false, 
-  handleCloseModal = () => {}, 
-  modalFunction = () => {}, 
-  selectedContact = {},
+  handleCloseModal, 
+  value = {},
+  handleChange = () => {},
+  modalFunction = () => {},
 }) => {
-  const [contact, setContact] = useState({ _id:uuid()});
-
-  const handleChange = event => {
-    const { name, value } = event.target;
-    setContact({ ...contact, [name]: value });
-  };
-
-  const handleSubmit = () => {
-    modalFunction(contact);
-    handleCloseModal();
-    setContact({})
-  };
-
-  useEffect(()=>{
-    if(openModal) setContact({ ...selectedContact})
-  }, [openModal])
-
   return (
       <Modal
         open={openModal}
@@ -48,13 +32,13 @@ const ModalWithForm = ({
         >
           
           <Typography variant="h6" sx={{ marginTop:2, marginBottom:2 }}>
-            Datos:
+          {isCreating ? 'Crear Contacto' : 'Editar Contacto'}
           </Typography>
           <TextField
             label="Nombre"
             name="name"
             size="small"
-            value={contact?.name || '' }
+            value={value.name || '' }
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -66,7 +50,7 @@ const ModalWithForm = ({
             name="number"
             size="small"
             type="number"
-            value={contact?.number || ''}
+            value={value.number || ''}
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -77,7 +61,7 @@ const ModalWithForm = ({
             label="Direccion"
             name="address"
             size="small"
-            value={contact?.address || ''}
+            value={value.address || ''}
             onChange={handleChange}
             sx={{
               width: '300px',
@@ -88,13 +72,13 @@ const ModalWithForm = ({
             label={'Imagen'} 
             onChange={handleChange} 
             name={'img'} 
-            value={ selectedContact.img } 
+            value={ value.img || '' } 
           />
           <Button 
             variant="contained"
-            onClick={handleSubmit} 
+            onClick={modalFunction} 
           >
-            Guardar
+            {isCreating ? 'Crear' : 'Editar'}
           </Button>
         </Box>
       </Modal>
