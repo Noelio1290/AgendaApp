@@ -11,7 +11,7 @@ export const db = getFirestore();
 export const storage = getStorage(app);
 
 // Initialize emulators
-if (!isProduction) {
+if (isProduction) {
   connectFirestoreEmulator(db, 'localhost', 6004);
   connectStorageEmulator(storage, 'localhost', 6005);
 }
@@ -23,29 +23,35 @@ export const getContactList = () => {
 };
 
 export const addContact = async (contact) => {
-  // Convert the Blob URL to a Blob object
-  const response = await fetch(contact.img);
-  const blob = await response.blob();
+  if(contact.img !== '') {
+    // Convert the Blob URL to a Blob object
+    const response = await fetch(contact.img);
+    const blob = await response.blob();
 
-  // Create a file object (File) from the Blob
-  const file = new File([blob], contact._id, { type: 'image/png' }); // Adjust the file type according to the image type
+    // Create a file object (File) from the Blob
+    const file = new File([blob], contact._id, { type: 'image/png' }); // Adjust the file type according to the image type
 
-  // Create a reference to where the file will be stored in Firebase Storage
-  const storageRef = ref(storage, `contacts/${contact._id}`);
+    // Create a reference to where the file will be stored in Firebase Storage
+    const storageRef = ref(storage, `contacts/${contact._id}`);
 
-  // Upload the file to the location specified in storageRef
-  await uploadBytes(storageRef, file);
+    // Upload the file to the location specified in storageRef
+    await uploadBytes(storageRef, file);
 
-  // URL is generated to retrieve image from Firebase Storage
-  const url = await getDownloadURL(storageRef);
+    // URL is generated to retrieve image from Firebase Storage
+    const url = await getDownloadURL(storageRef);
 
-  // Contact URL is modified to update it
-  const contactWithURL = { ...contact, img: url };
+    // Contact URL is modified to update it
+    const contactWithURL = { ...contact, img: url };
 
-  // Create a reference to where the contact will be stored in Firebase firestore
-  const contactsListRef = firestoreCollection(db, "ContactsList");
-  const contactDocRef = doc(contactsListRef, contact._id);
-  await setDoc(contactDocRef, contactWithURL);
+    // Create a reference to where the contact will be stored in Firebase firestore
+    const contactsListRef = firestoreCollection(db, "ContactsList");
+    const contactDocRef = doc(contactsListRef, contact._id);
+    await setDoc(contactDocRef, contactWithURL);
+  } else {
+    const contactsListRef = firestoreCollection(db, "ContactsList");
+    const contactDocRef = doc(contactsListRef, contact._id);
+    await setDoc(contactDocRef, contact);
+  }
 };
 
 export const editContact = async (updatedContact) => {

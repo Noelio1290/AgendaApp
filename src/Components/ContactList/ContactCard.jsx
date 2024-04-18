@@ -10,9 +10,7 @@ const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
       variant="outlined" 
       sx={{ 
         display:'flex',
-        width: '90%', 
-        minWidth: '250px', 
-        maxWidth: '200px',
+        width: '85%',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         border: 2, 
         marginBottom: .5,
@@ -32,7 +30,7 @@ const ContactCard = ({ contact = {}, onCardClick = () => {}, }) => {
         sx={{ 
           display:'flex', 
           textAlign: 'center', 
-          alignItems:'center' 
+          alignItems:'center',
         }}
       >
         <Typography 

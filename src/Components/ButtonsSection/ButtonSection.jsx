@@ -17,12 +17,11 @@ const ButtonSection = (
         alignItems:'center',
         border:'1px solid',
         borderColor: 'white',
-        maxWidth:'330px',
+        maxWidth:'320px',
         width:'350px',
         height:'120px',
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         borderRadius: '8px',
-        marginBottom:2
       }}
     >
       <Box>

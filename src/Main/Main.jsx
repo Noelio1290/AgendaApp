@@ -120,18 +120,30 @@ const Main = () => {
   const areButtonsActive = Object.keys(selectedContact || {}).length > 0 ; 
 
   return (
-    <Container
-      sx={{ 
-        display: 'flex',
-        width: '100%',
-        height: '97vh',
-      }}>
-      <Paper 
-        sx={{
-          width: '100%',  // 100% del ancho del viewport
-          height: '100%', // 95vh de la altura del viewport
-          overflow: 'hidden', // Asegura que la imagen no sobresalga
-          position: 'relative', // Asegura que los elementos secundarios se posicionen relativos a este contenedor
+    <Paper 
+      sx={{
+        width: '100%',  // 100% del ancho del viewport
+        height: '100%', // 95vh de la altura del viewport
+        overflow: 'hidden', // Asegura que la imagen no sobresalga
+        position: 'relative', // Asegura que los elementos secundarios se posicionen relativos a este contenedor
+      }}
+    >
+      <img
+        src={Fondo}
+        alt=""
+        style={{
+          objectFit: 'cover',
+          width: '100vW', // Cubre todo el ancho del contenedor
+          height: '100vH', // Cubre toda la altura del contenedor
+          position: 'absolute', // Posiciona la imagen absolutamente dentro del contenedor
+        }}
+      />
+      <Container
+        sx={{ 
+          display: 'flex',
+          width: '100%',
+          height: '97vh',
+          overflowY: 'auto',
         }}
       >
         <ModalWithForm
@@ -149,49 +161,82 @@ const Main = () => {
           handleChange={handleChangeModal}
           modalFunction={handleSubmitEdit}
         />
-        <img
-          src={Fondo}
-          alt=""
-          style={{
-            objectFit: 'cover',
-            width: '100%', // Cubre todo el ancho del contenedor
-            height: '100%', // Cubre toda la altura del contenedor
-            position: 'absolute', // Posiciona la imagen absolutamente dentro del contenedor
-          }}
-        />
         <Box 
           sx={{
-            position: 'relative', 
-            zIndex: 1,
+            display: 'flex',
+            flexFlow: 'column',
+            alignItems: 'center',
+            position: 'relative',
             width: '100%',
             height: '100%',
+            overflowY: 'visible',
           }}
         >
-          <Box sx={{ padding: 1 }}>
-            <Typography variant='h1' sx={{ textAlign: 'center', fontFamily:'Helvetica', color: 'white', textShadow: '2px 2px 4px rgba(255, 255, 255, 0.5), -2px -2px 4px rgba(0, 0, 0, 0.5)', }}>
+          <Box sx={{ padding: '1em' }}>
+            <Typography 
+              variant='h1' 
+              sx={{
+                textAlign: 'center', 
+                fontFamily: 'Helvetica', 
+                color: 'white', 
+                textShadow: '0.1em 0.1em 0.2em rgba(255, 255, 255, 0.5), -0.1em -0.1em 0.2em rgba(0, 0, 0, 0.5)', // Usando em para el desenfoque de sombra de texto
+                fontSize: '3em' // Tamaño relativo del texto
+              }}
+            >
               Agenda
             </Typography>
           </Box>
-          <Box sx={{ display:'flex', flexDirection:'Row', justifyContent:'space-evenly', flexWrap:'wrap' }}>
-            <Box>
-              <ContactList contactsList={contactList} onCardClick={onCardClick} />
-            </Box>
+          <Box
+            sx={{
+              display:'flex',
+              flexDirection:{
+                xs: 'column',
+                sm: 'row',
+                md: 'row',
+                lg: 'row',
+              },
+              justifyContent: 'center',
+              gap: {
+                xs: 0.5,
+                sm: 5,
+                md: 5,
+                lg: 5,
+              },
+              paddingBottom: {
+                xs: 1,
+                sm: 'none',
+                md: 'none',
+                lg: 'none',
+              },
+            }}
+          >
+            <ContactList contactsList={contactList} onCardClick={onCardClick} />
             <Box sx={{
               display: 'flex', 
               flexDirection: 'column',
+              gap: {
+                xs: 1,
+                sm: 3,
+                md: 3,
+                lg: 3,
+              },
               alignItems: 'center',
-              width: '100%',
-              minWidth: '360px',
-              maxWidth: '370px',
-              height: '380px',
-              maxHeight: '380px',
-              border:'1px solid',
+              justifyContent: 'center',
+              width: '90%',
+              minWidth: '340px',
+              height: {
+                xs: '60vh',
+                sm: '75vh',
+                md: '75vh',
+                lg: '75vh',
+              },
+              border: '1px solid',
               borderColor: 'white',
               borderRadius: '10px',
               background: 'transparent',
               backdropFilter: 'blur(10px)',
-              marginBottom:1,
-              paddingTop: 1,
+              paddingTop: 0.5,
+              paddingBottom: 0.5,
              }}>
               <SelectedContactWindow contact={selectedContact} />
               <ButtonSection 
@@ -203,8 +248,8 @@ const Main = () => {
             </Box>
           </Box>
         </Box>
-      </Paper>
-    </Container>
+      </Container>
+    </Paper>
   );
 };
 

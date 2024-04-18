@@ -10,19 +10,32 @@ const ContactList = ({ contactsList = [], onCardClick = () => {}, }) => {
         display: 'flex', 
         flexDirection: 'column',
         alignItems: 'center',
-        width: '100%',
+        width: '40%',
         minWidth: '340px',
-        maxWidth: '350px',
-        height: '97%',
-        border:'1px solid',
+        height: {
+          xs: '40vh',
+          sm: '75vh',
+          md: '75vh',
+          lg: '75vh',
+        },
+        border: '1px solid',
         borderColor: 'white',
         borderRadius: '10px',
         background: 'transparent',
         backdropFilter: 'blur(10px)',
-        marginBottom:1,
+        paddingTop: 0.5,
+        paddingBottom: 0.5,
       }}
     >
-      <Typography variant="h6" sx={{ textAlign: 'center', fontFamily:'Helvetica', color: 'white', fontSize: 24, marginTop:1, }} >
+      <Typography 
+        variant="h6" 
+        sx={{ 
+          textAlign: 'center', 
+          fontFamily: 'Helvetica', 
+          color: 'white', 
+          fontSize: '2em', // Tamaño relativo del texto
+        }}
+      >
         Contactos:
       </Typography>
       <Box 
@@ -30,10 +43,9 @@ const ContactList = ({ contactsList = [], onCardClick = () => {}, }) => {
           display: 'flex',
           flexFlow: 'column',
           alignItems: 'center',
-          width: '95%',
-          minWidth: '95%',
-          height: '85%',
-          overflowY: 'auto',
+          width: '100%',
+          height: '100%',
+          overflowY: 'visible',
           overflowX: 'hidden',
         }}>
         {contactsList.map((contact,key) => (
