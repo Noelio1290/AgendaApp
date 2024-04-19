@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 export const initialState = {
   contactList:[],
   selectedContact: {},
+  isLoading: false,
 };
 
 export const actions = {
@@ -11,6 +12,7 @@ export const actions = {
   SET_CHANGE_CONTACT: 'SET_CHANGE_CONTACT',
   SET_SELECTED_CONTACT: 'SET_SELECTED_CONTACT',
   RESET_SELECTED_CONTACT: 'RESET_SELECTED_CONTACT',
+  SET_LOADER: 'SET_LOADER',
 };
 
 export const reducer = (state, action) => {
@@ -50,6 +52,11 @@ export const reducer = (state, action) => {
         ...state,
         selectedContact: {}
       };
+      case actions.SET_LOADER:
+        return { 
+          ...state,
+          isLoading: action.file
+        };
     default:
       return {...state};
   }

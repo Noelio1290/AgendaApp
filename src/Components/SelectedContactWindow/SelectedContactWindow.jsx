@@ -16,8 +16,6 @@ const SelectedContactWindow = ({ contact = {} }) => {
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         border: '1px solid',
         borderColor: 'white',
-        marginTop: 1,
-        marginBottom: 1,
       }}
     >
       <CardOverflow>

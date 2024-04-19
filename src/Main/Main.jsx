@@ -7,15 +7,17 @@ import ModalWithForm from '../Components/ModalWithForm';
 import { reducer, initialState, actions } from '../Utils/Commons';
 import { getContactList, addContact, editContact, deleteContact } from '../firebase/firebase';
 import Fondo from '../Fondo.jpg';
+import Loader from "../Components/Loader/Loader";
 
 const Main = () => {
   const [ state, dispatch] = useReducer(reducer, initialState);
 
-  const { contactList, selectedContact } = state;
+  const { contactList, selectedContact, isLoading } = state;
 
   useEffect(() => {
     const fetchContactList = async () => {
       try {
+        dispatch({ type: actions.SET_LOADER, file: true });
         const contactListSnapshot = await getContactList();
         const formattedContactList = contactListSnapshot.docs.map(doc => {
           const docData = doc.data();
@@ -27,7 +29,9 @@ const Main = () => {
         dispatch({ type: actions.SET_LIST, file: formattedContactList });
       } catch (error) {
         console.error("Error fetching contact list:", error);
-      };
+      } finally {
+        dispatch({ type: actions.SET_LOADER, file: false }); // Desactiva el loader, ya sea que la solicitud sea exitosa o falle
+      }
     };
 
     fetchContactList();
@@ -57,6 +61,7 @@ const Main = () => {
 
   const handleSubmitCreate = async () => {
     try {
+      dispatch({ type: actions.SET_LOADER, file: true });
       await addContact(selectedContact);
       const contactListSnapshot = await getContactList();
       const formattedContactList = contactListSnapshot.docs.map(doc => ({
@@ -67,6 +72,8 @@ const Main = () => {
       handleCloseModal();
     } catch (error) {
       console.error("Error al guardar el contacto:", error);
+    } finally {
+      dispatch({ type: actions.SET_LOADER, file: false }); // Desactiva el loader, ya sea que la solicitud sea exitosa o falle
     }
   };
 
@@ -78,6 +85,7 @@ const Main = () => {
 
   const handleSubmitEdit = async () => {
     try {
+      dispatch({ type: actions.SET_LOADER, file: true });
       await editContact(selectedContact);
       const contactListSnapshot = await getContactList();
       const formattedContactList = contactListSnapshot.docs.map(doc => {
@@ -92,12 +100,15 @@ const Main = () => {
       handleCloseModalEdit();
     } catch (error) {
       console.error("Error al editar el contacto:", error);
+    } finally {
+      dispatch({ type: actions.SET_LOADER, file: false }); // Desactiva el loader, ya sea que la solicitud sea exitosa o falle
     }
   };
 
   // Handler delete contact
   const onDeleteContact = async () => {
     try {
+      dispatch({ type: actions.SET_LOADER, file: true });
       await deleteContact(selectedContact._id);
       const contactListSnapshot = await getContactList();
       const formattedContactList = contactListSnapshot.docs.map(doc => ({
@@ -108,6 +119,8 @@ const Main = () => {
       handleCloseModalEdit();
     } catch (error) {
       console.error("Error al borrar el contacto:", error);
+    } finally {
+      dispatch({ type: actions.SET_LOADER, file: false }); // Desactiva el loader, ya sea que la solicitud sea exitosa o falle
     }
   };
 
@@ -117,7 +130,10 @@ const Main = () => {
   };
 
   //Set buttons active
-  const areButtonsActive = Object.keys(selectedContact || {}).length > 0 ; 
+  const areButtonsActive = Object.keys(selectedContact || {}).length > 0 ;
+
+  //Set Loader
+  const loaderStyle = isLoading  ? 'flex' : 'none';
 
   return (
     <Paper 
@@ -128,6 +144,7 @@ const Main = () => {
         position: 'relative', // Asegura que los elementos secundarios se posicionen relativos a este contenedor
       }}
     >
+      <Loader loaderStyle={loaderStyle} />
       <img
         src={Fondo}
         alt=""
@@ -215,7 +232,7 @@ const Main = () => {
               display: 'flex', 
               flexDirection: 'column',
               gap: {
-                xs: 1,
+                xs: 0.5,
                 sm: 3,
                 md: 3,
                 lg: 3,
@@ -230,7 +247,7 @@ const Main = () => {
                 md: '75vh',
                 lg: '75vh',
               },
-              border: '1px solid',
+              border: '2px solid',
               borderColor: 'white',
               borderRadius: '10px',
               background: 'transparent',

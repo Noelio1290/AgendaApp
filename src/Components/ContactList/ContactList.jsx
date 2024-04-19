@@ -18,13 +18,11 @@ const ContactList = ({ contactsList = [], onCardClick = () => {}, }) => {
           md: '75vh',
           lg: '75vh',
         },
-        border: '1px solid',
+        border: '2px solid',
         borderColor: 'white',
         borderRadius: '10px',
         background: 'transparent',
         backdropFilter: 'blur(10px)',
-        paddingTop: 0.5,
-        paddingBottom: 0.5,
       }}
     >
       <Typography 

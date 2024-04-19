@@ -4,7 +4,7 @@ import { CircularProgress, Box, createTheme, ThemeProvider } from '@mui/material
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#000',
+      main: '#FFFFFF',
     },
   },
 });
@@ -13,22 +13,30 @@ const Loader = ({ loaderStyle }) => {
   return (
     <Box
       sx={{
-        position: 'fixed',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
         display: loaderStyle,
-        justifyContent: 'center',
-        alignItems: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
         width: '100%',
         height: '100%',
-        flexGrow: 1,
-      }}>
-      <ThemeProvider theme={theme}>
-        <CircularProgress color="primary" size={100} sx={{ display: loaderStyle }} />
-      </ThemeProvider>
+        background: 'transparent',
+        backdropFilter: 'blur(10px)',
+        zIndex: 3,
+      }}
+    >
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 4,
+        }}
+      >
+        <ThemeProvider theme={theme}>
+          <CircularProgress color="primary" size={200} sx={{ display: loaderStyle }} />
+        </ThemeProvider>
+      </Box>
     </Box>
   );
 };
