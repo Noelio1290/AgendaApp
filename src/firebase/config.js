@@ -9,4 +9,4 @@ const firebaseConfig = {
 
 export default firebaseConfig;
 
-export const isProduction = true;
+export const isProduction = false;
