@@ -14,6 +14,7 @@ const ModalWithForm = ({
       <Modal
         open={openModal}
         onClose={handleCloseModal}
+        sx={{ zIndex: 2, }}
       >
         <Box 
           sx={{
@@ -21,13 +22,14 @@ const ModalWithForm = ({
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '340px',
-            height: '550px',
+            width: '40%',
+            minWidth: '340px',
+            height: '85vH',
             bgcolor: 'background.paper',
             border: '2px solid',
             display:'flex',
             flexDirection:'column',
-            alignItems:'center'
+            alignItems:'center',
           }}
         >
           
